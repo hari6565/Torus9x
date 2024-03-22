@@ -279,14 +279,14 @@ export const UFDashboard = () => {
           nodes={allUFNode}
           // edges={edges}
           autoPanOnNodeDrag={false}
-          deleteNode={deleteNode}
+          // deleteNode={deleteNode}
           onInit={setReactFlowInstance}
           onDrop={onDrop}
           onDragOver={onDragOver}
           nodeTypes={NODE_TYPE}
           deleteKeyCode={["Backspace", "Delete"]}
           // selectKeyCode={["ctrl"]}
-          menu={menu}
+          // menu={menu}
           onNodeContextMenu={onNodeContextMenu}
           onPaneClick={onPaneClick}
           // snapGrid={[15, 15]}
