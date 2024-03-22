@@ -50,9 +50,9 @@ import { useDispatch, useSelector } from "react-redux";
 import {
   setUFEditComponents,
   setUFNode,
-} from "../../utilsFunctions/StateManage/UFStates";
+} from "@/app/utilsFunctions/Store/Reducers/UFSlice";
 
-import { readReddis, writeReddis } from "../../utilsFunctions/apiCallUnit";
+import { readReddis, writeReddis } from "@/app/utilsFunctions/apiCallUnit";
 
 import { applyNodeChanges } from "reactflow";
 

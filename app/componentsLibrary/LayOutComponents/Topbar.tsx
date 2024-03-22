@@ -33,7 +33,7 @@ import {
   Input,
 } from "@nextui-org/react";
 
-import logo from "../assets/logo.ico";
+import logo from "@/app/assets/logo.ico";
 import Image from "next/image";
 import { AiOutlineQuestionCircle } from "react-icons/ai";
 import { MdOutlineKeyboardCommandKey } from "react-icons/md";
@@ -53,7 +53,7 @@ import { LiaYoutubeSquare } from "react-icons/lia";
 import { CgRedo } from "react-icons/cg";
 
 import { useDispatch, useSelector } from "react-redux";
-import { writeReddis } from "../utilsFunctions/apiCallUnit";
+import { writeReddis } from "@/app/utilsFunctions/apiCallUnit";
 import { useRouter } from "next/navigation";
 import { VscPreview } from "react-icons/vsc";
 
