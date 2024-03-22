@@ -1,5 +1,5 @@
 import React from "react";
-import Builder from "../ReactFlowComponents/UFComponents/Builder";
+import Builder from "../componentsLibrary/ReactFlowComponents/UFComponents/Builder";
 
 const page = () => {
   return (
