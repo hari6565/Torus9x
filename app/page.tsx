@@ -8,8 +8,8 @@ import DFMain from "./ReactFlowComponents/DFComponents/DFMain";
 import PFMain from "./ReactFlowComponents/PFComponents/PFMain";
 const Page = () => {
   const sideState = useSelector((state: any) => state.MainStates.sideState);
-  const isLogin = useAuth();
-  // const isLogin = true;
+  const [isLogin, token] = useAuth();
+  console.log(token);
 
   return (
     <div className="flex flex-col w-full h-full">
