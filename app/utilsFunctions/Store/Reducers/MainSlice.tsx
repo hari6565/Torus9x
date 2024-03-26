@@ -2,10 +2,12 @@ import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
 interface NextUIState {
   sideState: string;
+  isLogin: boolean;
 }
 
 const initialState: NextUIState = {
   sideState: "UF",
+  isLogin: false,
 };
 
 const MainStates = createSlice({
@@ -15,9 +17,12 @@ const MainStates = createSlice({
     setState: (state, action: PayloadAction<string>) => {
       state.sideState = action.payload;
     },
+    setLogin: (state) => {
+      state.isLogin = !state.isLogin;
+    },
   },
 });
 
-export const { setState } = MainStates.actions;
+export const { setState, setLogin } = MainStates.actions;
 
 export default MainStates.reducer;

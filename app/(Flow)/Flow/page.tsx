@@ -1,14 +1,13 @@
 "use client";
 import React from "react";
-import UFMain from "./componentsLibrary/ReactFlowComponents/UFComponents/UFMain";
+import UFMain from "../../componentsLibrary/ReactFlowComponents/UFComponents/UFMain";
 import { useSelector } from "react-redux";
-import useAuth from "./hooks/useAuth";
+// import useAuth from "./hooks/useAuth";
+// import DFMain from "./componentsLibrary/ReactFlowComponents/DFComponents/DFMain";
 
 const Page = () => {
   const sideState = useSelector((state: any) => state.MainStates.sideState);
-  const [isLogin, token] = useAuth();
-  console.log(token);
-
+  const isLogin = useSelector((state: any) => state.MainStates.isLogin);
   return (
     <div className="flex flex-col w-full h-full">
       {isLogin &&
@@ -17,7 +16,7 @@ const Page = () => {
             case "UF":
               return <UFMain />;
             case "DF":
-              return <div>DF</div>;
+              return <div>df</div>;
             case "PF":
               return <div>PF</div>;
             default:
