@@ -9,7 +9,7 @@ import { Listbox, ListboxItem } from "@nextui-org/react";
 import { Tooltip } from "@nextui-org/react";
 
 import { useDispatch, useSelector } from "react-redux";
-import { setState } from "../utilsFunctions/StateManage/MainStates";
+import { setState } from "@/app/utilsFunctions/Store/Reducers/MainSlice";
 
 const Icons = [
   {

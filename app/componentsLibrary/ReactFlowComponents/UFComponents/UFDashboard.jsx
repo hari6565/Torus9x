@@ -50,9 +50,9 @@ import { useDispatch, useSelector } from "react-redux";
 import {
   setUFEditComponents,
   setUFNode,
-} from "../../utilsFunctions/StateManage/UFStates";
+} from "@/app/utilsFunctions/Store/Reducers/UFSlice";
 
-import { readReddis, writeReddis } from "../../utilsFunctions/apiCallUnit";
+import { readReddis, writeReddis } from "@/app/utilsFunctions/apiCallUnit";
 
 import { applyNodeChanges } from "reactflow";
 
@@ -279,14 +279,14 @@ export const UFDashboard = () => {
           nodes={allUFNode}
           // edges={edges}
           autoPanOnNodeDrag={false}
-          deleteNode={deleteNode}
+          // deleteNode={deleteNode}
           onInit={setReactFlowInstance}
           onDrop={onDrop}
           onDragOver={onDragOver}
           nodeTypes={NODE_TYPE}
           deleteKeyCode={["Backspace", "Delete"]}
           // selectKeyCode={["ctrl"]}
-          menu={menu}
+          // menu={menu}
           onNodeContextMenu={onNodeContextMenu}
           onPaneClick={onPaneClick}
           // snapGrid={[15, 15]}

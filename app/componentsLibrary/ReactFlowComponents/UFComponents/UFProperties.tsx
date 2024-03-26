@@ -18,7 +18,7 @@ import {
 import {
   setUFEditComponents,
   setUFNode,
-} from "@/app/utilsFunctions/StateManage/UFStates";
+} from "@/app/utilsFunctions/Store/Reducers/UFSlice";
 export default function UFProperties() {
   const UFeditComponents = useSelector(
     (state: any) => state.UFStates.UFeditComponents

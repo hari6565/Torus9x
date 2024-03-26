@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   Navbar,
   NavbarBrand,
@@ -33,7 +33,7 @@ import {
   Input,
 } from "@nextui-org/react";
 
-import logo from "../assets/logo.ico";
+import logo from "@/app/assets/logo.ico";
 import Image from "next/image";
 import { AiOutlineQuestionCircle } from "react-icons/ai";
 import { MdOutlineKeyboardCommandKey } from "react-icons/md";
@@ -51,13 +51,15 @@ import { FaPlay } from "react-icons/fa6";
 import { RiFeedbackLine } from "react-icons/ri";
 import { LiaYoutubeSquare } from "react-icons/lia";
 import { CgRedo } from "react-icons/cg";
-
 import { useDispatch, useSelector } from "react-redux";
-import { writeReddis } from "../utilsFunctions/apiCallUnit";
+import { writeReddis } from "@/app/utilsFunctions/apiCallUnit";
 import { useRouter } from "next/navigation";
 import { VscPreview } from "react-icons/vsc";
+import useAuth from "@/app/utilsFunctions/keyCloak/useAuth";
+import { Decode } from "../../utilsFunctions/lib/decode";
 
-export default function Topbar({ sideState }: any) {
+export default function Topbar({ sideState, tenet, handleLogout }: any) {
+  const navigate = useRouter();
   const disPatch = useDispatch();
 
   const { isOpen, onOpen, onOpenChange } = useDisclosure();
@@ -68,8 +70,6 @@ export default function Topbar({ sideState }: any) {
   );
 
   const allUFNode = useSelector((state: any) => state.UFStates.allUFNode);
-
-  const navigate = useRouter();
 
   const settoggle = async () => {
     try {
@@ -105,15 +105,15 @@ export default function Topbar({ sideState }: any) {
         </NavbarBrand>
         <NavbarContent className="hidden sm:flex gap-4" justify="center">
           <NavbarItem>
-            <Tooltip
+            {/* <Tooltip
               placement={"bottom"}
               content={"Help Menu"}
               color="secondary"
-            >
+            > */}
               <Link onPress={() => setopen(true)}>
                 <AiOutlineQuestionCircle className="w-6 h-6 text-black" />
               </Link>
-            </Tooltip>
+            {/* </Tooltip> */}
             <Modal size={"sm"} isOpen={open} onOpenChange={setopen}>
               <ModalContent>
                 <div className="p-3">
@@ -148,15 +148,15 @@ export default function Topbar({ sideState }: any) {
             </Modal>
           </NavbarItem>
           <NavbarItem isActive>
-            <Tooltip
+            {/* <Tooltip
               placement={"bottom"}
               content={"Keyboard Shortcuts"}
               color="secondary"
-            >
+            > */}
               <Link onPress={onOpen}>
                 <MdOutlineKeyboardCommandKey className="w-6 h-6  text-black" />
               </Link>
-            </Tooltip>
+            {/* </Tooltip> */}
             <Modal size={"xs"} isOpen={isOpen} onOpenChange={onOpenChange}>
               <ModalContent>
                 <ModalHeader>Icon Keyboard palette</ModalHeader>
@@ -189,15 +189,15 @@ export default function Topbar({ sideState }: any) {
             </Modal>
           </NavbarItem>
           <NavbarItem>
-            <Tooltip
+            {/* <Tooltip
               placement={"bottom"}
               content={"Command Palette"}
               color="secondary"
-            >
+            > */}
               <Link>
                 <IoSearchSharp className="w-6 h-6  text-black" />
               </Link>
-            </Tooltip>
+            {/* </Tooltip> */}
           </NavbarItem>
         </NavbarContent>
         <NavbarContent justify="end" className="">
@@ -214,11 +214,11 @@ export default function Topbar({ sideState }: any) {
             </div>
           </NavbarItem>
           <NavbarItem>
-            <Tooltip
+            {/* <Tooltip
               placement={"bottom"}
               content={"It's been 28 days since you last saved a new version."}
               color="secondary"
-            >
+            > */}
               <Dropdown>
                 <DropdownTrigger>
                   <Link className=" text-black">
@@ -231,65 +231,65 @@ export default function Topbar({ sideState }: any) {
                   <DropdownItem key="copy">App 2</DropdownItem>
                 </DropdownMenu>
               </Dropdown>
-            </Tooltip>
+            {/* </Tooltip> */}
           </NavbarItem>
 
           <div className="hover:border-1 hover:rounded-xl ">
             <NavbarItem>
-              <Tooltip
+              {/* <Tooltip
                 placement={"bottom"}
                 content={"Comments"}
                 color="secondary"
-              >
+              > */}
                 <Link>
                   <FcOk className="w-6 h-6 " />
                   <LiaComments className="w-6 h-6  text-black" />
                 </Link>
-              </Tooltip>
+              {/* </Tooltip> */}
             </NavbarItem>
           </div>
           <div className="hover:border-1 hover:rounded-xl ">
             <NavbarItem>
-              <Tooltip
+              {/* <Tooltip
                 placement={"bottom"}
                 content={"Project Issues"}
                 color="secondary"
-              >
+              > */}
                 <Link>
                   <FcOk className="w-6 h-6" />
                   <GrBug className="w-5 h-5  text-black" />
                 </Link>
-              </Tooltip>
+              {/* </Tooltip> */}
             </NavbarItem>
           </div>
           <div className="hover:border-1 hover:rounded-md ">
             <NavbarItem>
-              <Tooltip
+              {/* <Tooltip
                 placement={"bottom"}
                 content={"Dveloper Menu"}
                 color="secondary"
-              >
+              > */}
                 <Link>
                   <FaCode className="w-6 h-6  text-black" />
                 </Link>
-              </Tooltip>
+              {/* </Tooltip> */}
             </NavbarItem>
           </div>
           <div className="hover:border-1 hover:rounded-md ">
             <NavbarItem>
-              <Tooltip
+              {/* <Tooltip
                 placement={"bottom"}
                 content={"Project Share"}
                 color="secondary"
-              >
+              > */}
                 <Link>
                   <RiShareBoxFill className="w-6 h-6  text-black" />
                 </Link>
-              </Tooltip>
+              {/* </Tooltip> */}
             </NavbarItem>
           </div>
           <NavbarItem>
-            <Tooltip placement="bottom" content="Preview App" color="secondary">
+            {/* <Tooltip placement="bottom" content="Preview App" color="secondary"> */}
               <Button
                 className=" bg-white "
                 isDisabled={
@@ -300,7 +300,7 @@ export default function Topbar({ sideState }: any) {
               >
                 <MdPreview className="w-8 h-8 text-orange-600 " />
               </Button>
-            </Tooltip>
+            {/* </Tooltip> */}
           </NavbarItem>
 
           <NavbarItem>
@@ -310,6 +310,20 @@ export default function Topbar({ sideState }: any) {
               className="bg-black text-white"
             >
               <VscPreview color="white" size={20} />
+            </Button>
+          </NavbarItem>
+          <NavbarItem>
+            <Button
+              size="sm"
+              onClick={handleLogout}
+              className="bg-black text-white"
+            >
+              LogOut
+            </Button>
+          </NavbarItem>
+          <NavbarItem>
+            <Button size="sm" onClick={() => console.log(tenet)}>
+              show
             </Button>
           </NavbarItem>
         </NavbarContent>
