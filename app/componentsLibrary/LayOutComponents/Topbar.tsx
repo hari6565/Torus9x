@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   Navbar,
   NavbarBrand,
@@ -51,14 +51,38 @@ import { FaPlay } from "react-icons/fa6";
 import { RiFeedbackLine } from "react-icons/ri";
 import { LiaYoutubeSquare } from "react-icons/lia";
 import { CgRedo } from "react-icons/cg";
-
 import { useDispatch, useSelector } from "react-redux";
 import { writeReddis } from "@/app/utilsFunctions/apiCallUnit";
 import { useRouter } from "next/navigation";
 import { VscPreview } from "react-icons/vsc";
+import useAuth from "@/app/utilsFunctions/keyCloak/useAuth";
+import { Decode } from "../../utilsFunctions/lib/decode";
 
 export default function Topbar({ sideState }: any) {
   const disPatch = useDispatch();
+  // const [keyCloak, token] = useAuth();
+  const [tenet, setTenet] = useState({
+    tenet: "",
+    role: [],
+  });
+
+  const handleLogout = () => {
+    // keyCloak.logout();
+  };
+
+  // useEffect(() => {
+  //   (async () => {
+  //     if (token) {
+  //       const res = await Decode(token);
+  //       if (res) {
+  //         setTenet({
+  //           tenet: res.preferred_username,
+  //           role: res.resource_access.demoClient.roles,
+  //         });
+  //       }
+  //     }
+  //   })();
+  // }, [token]);
 
   const { isOpen, onOpen, onOpenChange } = useDisclosure();
   const [open, setopen] = useState(false);
@@ -310,6 +334,20 @@ export default function Topbar({ sideState }: any) {
               className="bg-black text-white"
             >
               <VscPreview color="white" size={20} />
+            </Button>
+          </NavbarItem>
+          <NavbarItem>
+            <Button
+              size="sm"
+              onClick={handleLogout}
+              className="bg-black text-white"
+            >
+              LogOut
+            </Button>
+          </NavbarItem>
+          <NavbarItem>
+            <Button size="sm" onClick={() => console.log(tenet)}>
+              show
             </Button>
           </NavbarItem>
         </NavbarContent>
