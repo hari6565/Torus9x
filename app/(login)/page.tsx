@@ -3,13 +3,14 @@ import React from "react";
 import { Button } from "@nextui-org/react";
 import { MdKey } from "react-icons/md";
 import useAuth from "../utilsFunctions/keyCloak/useAuth";
+import { useRouter } from "next/navigation";
 
 const SignInButton = () => {
   // Add logic to handle sign-in action
+  const routes = useRouter();
   const handleKeycloakSignIn = () => {
-    const [keyCloak, token] = useAuth();
     console.log("Sign in button clicked");
-    [];
+    routes.push("./Flow");
   };
 
   return (

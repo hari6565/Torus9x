@@ -58,31 +58,9 @@ import { VscPreview } from "react-icons/vsc";
 import useAuth from "@/app/utilsFunctions/keyCloak/useAuth";
 import { Decode } from "../../utilsFunctions/lib/decode";
 
-export default function Topbar({ sideState }: any) {
+export default function Topbar({ sideState, tenet, handleLogout }: any) {
+  const navigate = useRouter();
   const disPatch = useDispatch();
-  // const [keyCloak, token] = useAuth();
-  const [tenet, setTenet] = useState({
-    tenet: "",
-    role: [],
-  });
-
-  const handleLogout = () => {
-    // keyCloak.logout();
-  };
-
-  // useEffect(() => {
-  //   (async () => {
-  //     if (token) {
-  //       const res = await Decode(token);
-  //       if (res) {
-  //         setTenet({
-  //           tenet: res.preferred_username,
-  //           role: res.resource_access.demoClient.roles,
-  //         });
-  //       }
-  //     }
-  //   })();
-  // }, [token]);
 
   const { isOpen, onOpen, onOpenChange } = useDisclosure();
   const [open, setopen] = useState(false);
@@ -92,8 +70,6 @@ export default function Topbar({ sideState }: any) {
   );
 
   const allUFNode = useSelector((state: any) => state.UFStates.allUFNode);
-
-  const navigate = useRouter();
 
   const settoggle = async () => {
     try {
