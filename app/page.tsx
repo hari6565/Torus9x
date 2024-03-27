@@ -7,26 +7,24 @@ import { useSelector } from "react-redux";
 
 const Page = () => {
   const sideState = useSelector((state: any) => state.MainStates.sideState);
-  const isLogin = useSelector((state: any) => state.MainStates.isLogin);
   return (
     <div className="flex flex-col w-full h-full">
-      {isLogin &&
-        (() => {
-          switch (sideState) {
-            case "UF":
-              return <UFMain />;
-            case "DF":
-              return <div>df</div>;
-            case "PF":
-              return <div>PF</div>;
-            default:
-              return (
-                <div className="flex justify-center items-center h-full w-full">
-                  ...on Process {sideState}
-                </div>
-              );
-          }
-        })()}
+      {(() => {
+        switch (sideState) {
+          case "UF":
+            return <UFMain />;
+          case "DF":
+            return <div>df</div>;
+          case "PF":
+            return <div>PF</div>;
+          default:
+            return (
+              <div className="flex justify-center items-center h-full w-full">
+                ...on Process {sideState}
+              </div>
+            );
+        }
+      })()}
     </div>
   );
 };
