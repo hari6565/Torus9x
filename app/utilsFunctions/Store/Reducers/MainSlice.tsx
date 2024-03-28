@@ -1,28 +1,33 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
 interface NextUIState {
-  sideState: string;
+  fabric : string;
   isLogin: boolean;
+  applicationName : string
 }
 
 const initialState: NextUIState = {
-  sideState: "UF",
+  fabric : "UF",
   isLogin: false,
+  applicationName : "",
 };
 
 const MainStates = createSlice({
   name: "UF",
   initialState,
   reducers: {
-    setState: (state, action: PayloadAction<string>) => {
-      state.sideState = action.payload;
+    setFabric: (state, action: PayloadAction<string>) => {
+      state.fabric = action.payload;
     },
     setLogin: (state) => {
       state.isLogin = !state.isLogin;
     },
+    setApplicationName : (state , action:PayloadAction<string>) => {
+      state.applicationName = action.payload;
+    },
   },
 });
 
-export const { setState, setLogin } = MainStates.actions;
+export const { setFabric, setLogin, setApplicationName } = MainStates.actions;
 
 export default MainStates.reducer;

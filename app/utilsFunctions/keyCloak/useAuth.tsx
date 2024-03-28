@@ -24,7 +24,7 @@ const useAuth = () => {
     client
       .init({
         onLoad: "login-required",
-        redirectUri: "http://localhost:3008",
+        redirectUri: "http://localhost:3000",
       })
       .then(() => {
         settoken(client.token);

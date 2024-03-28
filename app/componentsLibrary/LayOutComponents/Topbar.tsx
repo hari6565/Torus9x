@@ -57,8 +57,9 @@ import { useRouter } from "next/navigation";
 import { VscPreview } from "react-icons/vsc";
 import useAuth from "@/app/utilsFunctions/keyCloak/useAuth";
 import { Decode } from "../../utilsFunctions/lib/decode";
+import { setApplicationName } from "@/app/utilsFunctions/Store/Reducers/MainSlice";
 
-export default function Topbar({ sideState, tenet, handleLogout }: any) {
+export default function Topbar({ sideState, tenant, handleLogout }: any) {
   const navigate = useRouter();
   const disPatch = useDispatch();
 
@@ -94,26 +95,26 @@ export default function Topbar({ sideState, tenet, handleLogout }: any) {
   };
   return (
     <div className="shadow-lg shadow-violet-100 hover:bg-violet-100">
-      <Navbar isBordered className="h-11 ">
+      <Navbar isBordered className="h-11" maxWidth="xl">
         <NavbarBrand
           as={Link}
           href="https://www.gsstvl.com"
-          className=" -ml-44"
+          // className=" -ml-44"
         >
           <Image className=" w-8 h-8  transition-all" src={logo} alt=""></Image>
           <p className="font-bold text-inherit text-black">Torus</p>
         </NavbarBrand>
         <NavbarContent className="hidden sm:flex gap-4" justify="center">
           <NavbarItem>
-            {/* <Tooltip
+            <Tooltip
               placement={"bottom"}
               content={"Help Menu"}
               color="secondary"
-            > */}
+            >
               <Link onPress={() => setopen(true)}>
                 <AiOutlineQuestionCircle className="w-6 h-6 text-black" />
               </Link>
-            {/* </Tooltip> */}
+            </Tooltip>
             <Modal size={"sm"} isOpen={open} onOpenChange={setopen}>
               <ModalContent>
                 <div className="p-3">
@@ -148,15 +149,15 @@ export default function Topbar({ sideState, tenet, handleLogout }: any) {
             </Modal>
           </NavbarItem>
           <NavbarItem isActive>
-            {/* <Tooltip
+            <Tooltip
               placement={"bottom"}
               content={"Keyboard Shortcuts"}
               color="secondary"
-            > */}
+            >
               <Link onPress={onOpen}>
                 <MdOutlineKeyboardCommandKey className="w-6 h-6  text-black" />
               </Link>
-            {/* </Tooltip> */}
+            </Tooltip>
             <Modal size={"xs"} isOpen={isOpen} onOpenChange={onOpenChange}>
               <ModalContent>
                 <ModalHeader>Icon Keyboard palette</ModalHeader>
@@ -189,20 +190,20 @@ export default function Topbar({ sideState, tenet, handleLogout }: any) {
             </Modal>
           </NavbarItem>
           <NavbarItem>
-            {/* <Tooltip
+            <Tooltip
               placement={"bottom"}
               content={"Command Palette"}
               color="secondary"
-            > */}
+            >
               <Link>
                 <IoSearchSharp className="w-6 h-6  text-black" />
               </Link>
-            {/* </Tooltip> */}
+            </Tooltip>
           </NavbarItem>
         </NavbarContent>
         <NavbarContent justify="end" className="">
           <NavbarItem>
-            <div>
+            <div onClick={()=> disPatch(setApplicationName(''))}>
               <Input
                 variant="bordered"
                 key=""
@@ -214,11 +215,11 @@ export default function Topbar({ sideState, tenet, handleLogout }: any) {
             </div>
           </NavbarItem>
           <NavbarItem>
-            {/* <Tooltip
+            <Tooltip
               placement={"bottom"}
               content={"It's been 28 days since you last saved a new version."}
               color="secondary"
-            > */}
+            >
               <Dropdown>
                 <DropdownTrigger>
                   <Link className=" text-black">
@@ -231,65 +232,65 @@ export default function Topbar({ sideState, tenet, handleLogout }: any) {
                   <DropdownItem key="copy">App 2</DropdownItem>
                 </DropdownMenu>
               </Dropdown>
-            {/* </Tooltip> */}
+            </Tooltip>
           </NavbarItem>
 
           <div className="hover:border-1 hover:rounded-xl ">
             <NavbarItem>
-              {/* <Tooltip
+              <Tooltip
                 placement={"bottom"}
                 content={"Comments"}
                 color="secondary"
-              > */}
+              >
                 <Link>
                   <FcOk className="w-6 h-6 " />
                   <LiaComments className="w-6 h-6  text-black" />
                 </Link>
-              {/* </Tooltip> */}
+              </Tooltip>
             </NavbarItem>
           </div>
           <div className="hover:border-1 hover:rounded-xl ">
             <NavbarItem>
-              {/* <Tooltip
+              <Tooltip
                 placement={"bottom"}
                 content={"Project Issues"}
                 color="secondary"
-              > */}
+              >
                 <Link>
                   <FcOk className="w-6 h-6" />
                   <GrBug className="w-5 h-5  text-black" />
                 </Link>
-              {/* </Tooltip> */}
+              </Tooltip>
             </NavbarItem>
           </div>
           <div className="hover:border-1 hover:rounded-md ">
             <NavbarItem>
-              {/* <Tooltip
+              <Tooltip
                 placement={"bottom"}
                 content={"Dveloper Menu"}
                 color="secondary"
-              > */}
+              >
                 <Link>
                   <FaCode className="w-6 h-6  text-black" />
                 </Link>
-              {/* </Tooltip> */}
+              </Tooltip>
             </NavbarItem>
           </div>
           <div className="hover:border-1 hover:rounded-md ">
             <NavbarItem>
-              {/* <Tooltip
+              <Tooltip
                 placement={"bottom"}
                 content={"Project Share"}
                 color="secondary"
-              > */}
+              >
                 <Link>
                   <RiShareBoxFill className="w-6 h-6  text-black" />
                 </Link>
-              {/* </Tooltip> */}
+              </Tooltip>
             </NavbarItem>
           </div>
           <NavbarItem>
-            {/* <Tooltip placement="bottom" content="Preview App" color="secondary"> */}
+            <Tooltip placement="bottom" content="Preview App" color="secondary">
               <Button
                 className=" bg-white "
                 isDisabled={
@@ -300,7 +301,7 @@ export default function Topbar({ sideState, tenet, handleLogout }: any) {
               >
                 <MdPreview className="w-8 h-8 text-orange-600 " />
               </Button>
-            {/* </Tooltip> */}
+            </Tooltip>
           </NavbarItem>
 
           <NavbarItem>
@@ -322,7 +323,7 @@ export default function Topbar({ sideState, tenet, handleLogout }: any) {
             </Button>
           </NavbarItem>
           <NavbarItem>
-            <Button size="sm" onClick={() => console.log(tenet)}>
+            <Button size="sm" onClick={() => console.log(tenant)}>
               show
             </Button>
           </NavbarItem>

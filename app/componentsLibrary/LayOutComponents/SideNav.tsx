@@ -9,7 +9,7 @@ import { Listbox, ListboxItem } from "@nextui-org/react";
 import { Tooltip } from "@nextui-org/react";
 
 import { useDispatch, useSelector } from "react-redux";
-import { setState } from "@/app/utilsFunctions/Store/Reducers/MainSlice";
+import { setFabric } from "@/app/utilsFunctions/Store/Reducers/MainSlice";
 
 const Icons = [
   {
@@ -32,12 +32,11 @@ const Icons = [
 export default function SideNav() {
   const disPatch = useDispatch();
   const sideState = useSelector((state: any) => state.MainStates.sideState);
-  console.log(sideState);
   return (
     <div className="h-[90vh]">
       <Listbox
         onAction={(e: any) => {
-          disPatch(setState(e));
+          disPatch(setFabric(e));
         }}
         variant="faded"
         aria-label="Listbox menu with icons"
@@ -45,13 +44,13 @@ export default function SideNav() {
       >
         {Icons.map((item: any) => (
           <ListboxItem textValue={item.tooltip} key={item.tooltip}>
-            {/* <Tooltip content={item.tooltip} key={item.id} placement="right-end"> */}
+            <Tooltip content={item.tooltip} key={item.id} placement="right-end">
             <div>
               {React.createElement(item.icon, {
                 size: 20,
               })}
             </div>
-            {/* </Tooltip> */}
+            </Tooltip>
           </ListboxItem>
         ))}
       </Listbox>
