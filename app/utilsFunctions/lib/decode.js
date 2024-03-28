@@ -9,7 +9,7 @@ export async function Decode(token) {
   const KEY = `-----BEGIN PUBLIC KEY-----\n${PUBLICK_KEY}\n-----END PUBLIC KEY-----`;
   //   console.log(token);
   const decoded = jwt.verify(token, KEY, { algorithms: ["RS256"] });
-  console.log(decoded);
+  // console.log(decoded);
 
   return decoded;
 }
