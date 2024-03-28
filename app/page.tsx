@@ -1,35 +1,39 @@
 "use client";
 import React from "react";
-import UFMain from "./ReactFlowComponents/UFComponents/UFMain";
-import { useSelector } from "react-redux";
-import useAuth from "./hooks/useAuth";
+import UFMain from "./componentsLibrary/ReactFlowComponents/UFComponents/UFMain";
+import {useSelector } from "react-redux";
+import { RootState } from "./utilsFunctions/Store/store";
+import ApplicationSelector from "./componentsLibrary/applicationSelectionWindow/ApplicationSelector";
 
-import DFMain from "./ReactFlowComponents/DFComponents/DFMain";
-import PFMain from "./ReactFlowComponents/PFComponents/PFMain";
 const Page = () => {
-  const sideState = useSelector((state: any) => state.MainStates.sideState);
-  const [isLogin, token] = useAuth();
-  console.log(token);
-
+  const fabric = useSelector(
+    (state: RootState) => state.MainStates.fabric
+  );
+  const applicationName = useSelector(
+    (state: RootState) => state.MainStates.applicationName
+  );
   return (
     <div className="flex flex-col w-full h-full">
-      {isLogin &&
+      {applicationName ? (
         (() => {
-          switch (sideState) {
+          switch (fabric) {
             case "UF":
               return <UFMain />;
             case "DF":
-              return <DFMain />;
+              return <div>df</div>;
             case "PF":
-              return <PFMain />;
+              return <div>PF</div>;
             default:
               return (
                 <div className="flex justify-center items-center h-full w-full">
-                  ...on Process {sideState}
+                  ...on Process {fabric}
                 </div>
               );
           }
-        })()}
+        })()
+      ) : (
+        <ApplicationSelector />
+      )}
     </div>
   );
 };

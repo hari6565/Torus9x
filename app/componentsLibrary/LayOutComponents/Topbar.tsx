@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   Navbar,
   NavbarBrand,
@@ -33,7 +33,7 @@ import {
   Input,
 } from "@nextui-org/react";
 
-import logo from "../assets/logo.ico";
+import logo from "@/app/assets/logo.ico";
 import Image from "next/image";
 import { AiOutlineQuestionCircle } from "react-icons/ai";
 import { MdOutlineKeyboardCommandKey } from "react-icons/md";
@@ -51,13 +51,16 @@ import { FaPlay } from "react-icons/fa6";
 import { RiFeedbackLine } from "react-icons/ri";
 import { LiaYoutubeSquare } from "react-icons/lia";
 import { CgRedo } from "react-icons/cg";
-
 import { useDispatch, useSelector } from "react-redux";
-import { writeReddis } from "../utilsFunctions/apiCallUnit";
+import { writeReddis } from "@/app/utilsFunctions/apiCallUnit";
 import { useRouter } from "next/navigation";
 import { VscPreview } from "react-icons/vsc";
+import useAuth from "@/app/utilsFunctions/keyCloak/useAuth";
+import { Decode } from "../../utilsFunctions/lib/decode";
+import { setApplicationName } from "@/app/utilsFunctions/Store/Reducers/MainSlice";
 
-export default function Topbar({ sideState }: any) {
+export default function Topbar({ sideState, tenant, handleLogout }: any) {
+  const navigate = useRouter();
   const disPatch = useDispatch();
 
   const { isOpen, onOpen, onOpenChange } = useDisclosure();
@@ -68,8 +71,6 @@ export default function Topbar({ sideState }: any) {
   );
 
   const allUFNode = useSelector((state: any) => state.UFStates.allUFNode);
-
-  const navigate = useRouter();
 
   const settoggle = async () => {
     try {
@@ -94,11 +95,11 @@ export default function Topbar({ sideState }: any) {
   };
   return (
     <div className="shadow-lg shadow-violet-100 hover:bg-violet-100">
-      <Navbar isBordered className="h-11 ">
+      <Navbar isBordered className="h-11" maxWidth="xl">
         <NavbarBrand
           as={Link}
           href="https://www.gsstvl.com"
-          className=" -ml-44"
+          // className=" -ml-44"
         >
           <Image className=" w-8 h-8  transition-all" src={logo} alt=""></Image>
           <p className="font-bold text-inherit text-black">Torus</p>
@@ -202,7 +203,7 @@ export default function Topbar({ sideState }: any) {
         </NavbarContent>
         <NavbarContent justify="end" className="">
           <NavbarItem>
-            <div>
+            <div onClick={()=> disPatch(setApplicationName(''))}>
               <Input
                 variant="bordered"
                 key=""
@@ -310,6 +311,20 @@ export default function Topbar({ sideState }: any) {
               className="bg-black text-white"
             >
               <VscPreview color="white" size={20} />
+            </Button>
+          </NavbarItem>
+          <NavbarItem>
+            <Button
+              size="sm"
+              onClick={handleLogout}
+              className="bg-black text-white"
+            >
+              LogOut
+            </Button>
+          </NavbarItem>
+          <NavbarItem>
+            <Button size="sm" onClick={() => console.log(tenant)}>
+              show
             </Button>
           </NavbarItem>
         </NavbarContent>
